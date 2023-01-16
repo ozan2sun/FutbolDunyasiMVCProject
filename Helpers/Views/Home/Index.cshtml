@@ -1,0 +1,37 @@
+﻿@model List<Takim>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h2>Takımlar ve Oyuncuları</h2>
+
+@foreach (Takim takim in Model)
+{
+    <div class="card">
+        <div class="card-header">
+            @takim.Ad
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Oyuncu</th>
+                        <th>Forma No</th>
+                        <th>Mevki</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Oyuncu oyuncu in takim.Oyuncular)
+                    {
+                      <tr>
+                          <td>@oyuncu.Ad</td>
+                          <td>@oyuncu.FormaNo</td>
+                          <td>@Html.DisplayFor(x=>oyuncu.Mevki)</td>
+                      </tr>  
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

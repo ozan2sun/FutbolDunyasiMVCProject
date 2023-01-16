@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Oyuncu>
+@{
+    ViewBag.Title = "Oyuncular";
+    var basariMesaji = TempData["BasariMesaji"];
+}
+@if (Context.Request.Query["mesaj"] == "silindi")
+{
+    <div class="alert alert-info">
+        Oyuncu başarıyla silindi.
+    </div>
+}
+
+@if (basariMesaji !=null)
+{
+    <div class="alert alert-success">
+        @basariMesaji
+    </div>
+}
+
+<h1>Oyuncular</h1>
+
+<div>
+    <a class="btn btn-primary" asp-controller="Oyuncular" asp-action="Yeni">Yeni Oyuncu</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(x=>x.Id)</th>
+            <th>@Html.DisplayNameFor(x=>x.Ad)</th>
+            <th>@Html.DisplayNameFor(x=>x.FormaNo)</th>
+            <th>@Html.DisplayNameFor(x=>x.Mevki)</th>
+            <th>Takım</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>@item.FormaNo</td>
+            <td>@Html.DisplayFor(x=>item.Mevki)</td>
+            <td>@item.Takim?.Ad</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Sil" asp-route-id="@item.Id">Sil</a>
+                    <a class="btn btn-danger" asp-action="Duzenle" asp-route-id="@item.Id">Düzenle</a>
+            </td>
+        </tr>         
+        }
+    </tbody>
+</table>

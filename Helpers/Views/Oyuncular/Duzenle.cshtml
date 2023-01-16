@@ -1,0 +1,36 @@
+﻿@model DuzenleOyuncuViewModel  // Bana DuzenleOyuncuViewModel türünde bir nesne ver. O Benim Modelim olacak
+@{
+    ViewData["Title"] = "Oyuncu Düzenle";
+}
+
+
+<h1>@ViewBag.Title</h1>
+
+<form method="post">
+    <input asp-for="Id" type="hidden"/>
+    <div class="mb-2">
+        <label asp-for="Ad" class="form-label"></label>
+        <input asp-for="Ad" type="text" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label asp-for="FormaNo" class="form-label"></label>
+        <input asp-for="FormaNo" type="number" class="form-control" />
+        <span asp-validation-for="FormaNo" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label asp-for="Mevki" class="form-label"></label>
+        <select asp-for="Mevki" asp-items="Html.GetEnumSelectList<Mevki>()" class="form-control">
+            <option value="">Seçiniz</option>
+        </select>
+        <span asp-validation-for="Mevki" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label asp-for="TakimId" class="form-label"></label>
+        <select asp-for="TakimId" asp-items="ViewBag.Takimlar" class="form-control">
+            <option value="">Seçiniz</option>
+        </select>
+        <span asp-validation-for="TakimId" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary">Kaydet</button>
+</form>
